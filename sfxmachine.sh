@@ -13,6 +13,8 @@ mkdir $DIR1/wav-mono;
 sourcepath=/Applications/sox-14.4.1/testlyde
 echo "name of sfx"; read sfxname;
 echo "amount"; read amount;
+echo "max-length (seconds)"; read trimvalue;
+echo "fadeout-length (seconds)"; read fadeoutvalue;
 
 # Run this loop for as many sfx you need
 for i in `seq 1 $amount`;
@@ -41,7 +43,7 @@ for i in `seq 1 $amount`;
                     currentfile=$DIR/${file_matrix[$((RANDOM%num_files))]}
 
                     channelcheck=($(soxi -c $currentfile))
-                    echo $currentfile
+                    # echo $currentfile
 
                     if (($channelcheck == 1)); 
                         then
@@ -60,11 +62,13 @@ for i in `seq 1 $amount`;
 
     echo "Mix file1, 2, 3, 4 together into final"$i".wav"
     
-            sox -M file1.wav file2.wav file3.wav file4.wav $DIR1/wav-stereo/$sfxname$i.wav channels 2
+            sox -M file1.wav file2.wav file3.wav file4.wav $DIR1/wav-stereo/$sfxname$i.wav channels 2 trim 0 $trimvalue fade t 0 0 $fadeoutvalue norm -1
+
+            # sox $sfxname$i.wav $sfxname$i-faded.wav fade 2 1
 
             # lame $DIR1/wav-stereo/final$i.wav $DIR1/mp3-stereo/final$i-mp3-128kb.mp3
 
-            sox -M file1.wav file2.wav file3.wav file4.wav $DIR1/wav-mono/$sfxname$i-mono.wav remix -
+            sox -M file1.wav file2.wav file3.wav file4.wav $DIR1/wav-mono/$sfxname$i-mono.wav trim 0 $trimvalue fade t 0 0 $fadeoutvalue remix - norm -1
 
             # lame $DIR1/wav-mono/final$i-mono.wav $DIR1/mp3-mono/final$i-mp3-mono-128kb.mp3 
 done
