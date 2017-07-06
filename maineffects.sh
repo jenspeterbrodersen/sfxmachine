@@ -4,7 +4,7 @@ v=$((RANDOM % 15))
 
 if (( v == 0 )); 
     then
-        sox tempfile$ii.wav file$ii.wav speed "$speedvalue"c delay 0."$delayfloat" 0."$delayfloat" reverse norm
+        sox -V1 tempfile$ii.wav file$ii.wav speed "$speedvalue"c delay 0."$delayfloat" 0."$delayfloat" reverse norm -1
 else    
-    sox tempfile$ii.wav file$ii.wav speed "$speedvalue"c delay 0."$delayfloat" 0."$delayfloat" norm -1
+    sox -V1 tempfile$ii.wav file$ii.wav speed "$speedvalue"c delay 0."$delayfloat" 0."$delayfloat" norm -1
 fi
