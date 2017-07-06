@@ -8,20 +8,20 @@ DIR1="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 mkdir $DIR1/wav-stereo; echo "creating folder: $DIR1/wav-stereo"
 mkdir $DIR1/wav-mono; echo "creating folder: $DIR1/wav-mono"
 
-# promt user for details
-# echo "path to source audio files"; read sourcepath;
-sourcepath=/Applications/sox-14.4.1/sfxtest
+# promt user for settings
+echo "path to source audio files"; read sourcepath;
+# sourcepath=/Applications/sox-14.4.1/sfxtest
 echo "name of sfx"; read sfxname;
 echo "amount"; read amount;
 echo "max-length (seconds)"; read trimvalue;
 echo "fadeout-length (seconds)"; read fadeoutvalue;
 echo "number of round-robin variations"; read roundrobins;
 
-echo "name of sfx: $sfxname"
-echo "amount: $amount"
-echo "max-length $trimvalue"
-echo "fadeout-length $fadeoutvalue"
-echo "number of round-robin variations $roundrobins"
+# echo "name of sfx: $sfxname"
+# echo "amount: $amount"
+# echo "max-length $trimvalue"
+# echo "fadeout-length $fadeoutvalue"
+# echo "number of round-robin variations $roundrobins"
 
 
 # Run this loop for as many sfx you need
