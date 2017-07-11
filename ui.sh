@@ -1,5 +1,6 @@
 echo "creating UI sounds..."
 
+# Create folders
 mkdir $DIR1/wav-stereo/UI;
 mkdir $DIR1/wav-mono/UI;
 
@@ -11,38 +12,17 @@ for i in `seq 1 $amount`;
     # Pick random file in folder
     for ii in `seq 1 4`;
         do
-            # change pitch range by modifying speedmin & speedmax  
-            speedmin=2000
-            speedmax=3000
+            # Set pitch range 
+            speedmin=5000
+            speedmax=8000
 
             speedvalue=$((RANDOM % ($speedmax-$speedmin+1) + $speedmin))
             panleft=$((RANDOM % 10))
             panright=$((RANDOM % 10))
             delayfloat=$((RANDOM % 2))
 
-            if [[ -d "${DIR}" ]]
-                then
-                    file_matrix=($(ls "${DIR}"))
-                    num_files=${#file_matrix[*]}
-
-                    # create the temp audio wav files for later merging
-                    currentfile=$DIR/${file_matrix[$((RANDOM%num_files))]}
-
-                    channelcheck=($(soxi -c $currentfile))
-                    # echo $currentfile
-
-                    if (($channelcheck == 1)); 
-                        then
-                            sox $currentfile tempfile$ii.wav remix 1v0.$panleft 1v0.$panright norm -1
-                        else
-                            sox $currentfile tempfile$ii.wav norm -1
-                            # soxi tempfile$ii.wav
-                    fi
-                    
-                    # external script for main fx-chain
-                    source maineffects.sh
-
-            fi
+            # Pick random file
+            source pickrandomfile.sh
 
     done
 

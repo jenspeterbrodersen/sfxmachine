@@ -11,6 +11,9 @@ echo "Creating folderstructure..."
 
 mkdir -p $DIR1/$projectname/$projectname/sfx;
 mkdir -p $DIR1/$projectname/$projectname/music
+mkdir -p $DIR1/$projectname/$projectname/footsteps
+mkdir -p $DIR1/$projectname/$projectname/ui
+
 
 mkdir -p $DIR1/$projectname/themelibrary/theme;
 mkdir -p $DIR1/$projectname/themelibrary/movement;
