@@ -7,7 +7,8 @@ export PATH=$PATH:/Applications/sox-14.4.1
 DIR1="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Create folders
-mkdir $DIR1/wav-stereo; echo "creating folder: $DIR1/wav-stereo"
+# mkdir $DIR1/wav-stereo; echo "creating folder: $DIR1/wav-stereo"
+source createfolders.sh
 
 # Promt user for settings
 echo "path to source audio files"; read sourcepath;
@@ -57,12 +58,12 @@ making sfx # $i"
         done
 
     
-    # Mix file 1-4 together into $sfxname$i.wav (stereo)
-    echo "Mix file1, 2, 3, 4 together into $sfxname$i$i.wav"
+    # Create the final sfx file by mixing file 1-4.wav together into a single .wav file
+    echo "Mixing file1, 2, 3, 4 together into $sfxname$i$i.wav"
 
-    sox -V1 -M file1.wav file2.wav file3.wav file4.wav $DIR1/wav-stereo/$sfxname$i.wav channels 2 trim 0 $trimvalue fade t 0 0 $fadeoutvalue norm -1
+    sox -V1 -M file1.wav file2.wav file3.wav file4.wav $DIR1/$projectname/$projectname/sfx/$sfxname$i.wav channels 2 trim 0 $trimvalue fade t 0 0 $fadeoutvalue norm -1
 
-    # Create round robin variations
+    # Create additional round robin variations
     for variation in `seq 1 $roundrobins`; 
         do
         echo "creating round robin variation #$variation"
@@ -80,13 +81,14 @@ making sfx # $i"
             sox -V1 file4.wav file4-var.wav speed "$(($speedvalue+$((RANDOM % 500))))"c delay 0.$delayfloat 0.$delayfloat
 
             echo "mixing file1-r.wav...file4-r.wav together into $sfxname$i-$variation.wav"
-            sox -V1 -M file1-var.wav file2-var.wav file3-var.wav file4-var.wav $DIR1/wav-stereo/$sfxname$i-$variation.wav channels 2 trim 0 $trimvalue fade t 0 0 $fadeoutvalue norm -1
+            sox -V1 -M file1-var.wav file2-var.wav file3-var.wav file4-var.wav $DIR1/$projectname/$projectname/sfx/$sfxname$i-$variation.wav channels 2 trim 0 $trimvalue fade t 0 0 $fadeoutvalue norm -1
         done
 
 done
 
- echo "delete temp files"
- rm *.wav 
+# Delete temp files
+echo "delete temp files"
+rm *.wav 
 
 # Create UI sounds
 source ui.sh

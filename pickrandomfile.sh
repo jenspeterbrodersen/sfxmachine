@@ -11,10 +11,10 @@ if [[ -d "${sourcepath}" ]]
         currentfile=$sourcepath/${file_matrix[$((RANDOM%num_files))]}
         echo "picking file: $currentfile"
 
-        channelcheck=($(soxi -c $currentfile))
-        # echo $currentfile
-
+       
         # Check if file is mono, then create random panning
+        channelcheck=($(soxi -c $currentfile))
+
         if (($channelcheck == 1)); 
             then
                 echo "this file is mono creating $channelconvert$ii.wav and adding panning: left $panleft, right $panright" 

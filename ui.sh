@@ -1,4 +1,4 @@
-echo "creating UI sounds..."
+echo "Creating UI sounds..."
 
 # Create folders
 mkdir $DIR1/wav-stereo/UI;
@@ -26,13 +26,13 @@ for i in `seq 1 $amount`;
 
     done
 
+    # Create the final sfx file by mixing file 1-4.wav together into a single .wav file
     echo "Mix file1, 2, 3, 4 together into final"$i".wav"
     
-            sox -V1 -M file1.wav file2.wav file3.wav file4.wav $DIR1/wav-stereo/UI/$sfxname$i-ui.wav channels 2 trim 0 0.5 fade t 0 0 0.1 norm -1
-
-            sox -V1 -M file1.wav file2.wav file3.wav file4.wav $DIR1/wav-mono/UI/$sfxname$i-ui-mono.wav trim 0 0.5 fade t 0 0 0.1 remix - norm -1
+        sox -V1 -M file1.wav file2.wav file3.wav file4.wav $DIR1/$projectname/$projectname/ui/$sfxname$i-ui.wav channels 2 trim 0 0.5 fade t 0 0 0.1 norm -1
 
 done
 
- echo "delete temp files"
-    rm file1.wav file2.wav file3.wav file4.wav tempfile1.wav tempfile2.wav tempfile3.wav tempfile4.wav
+# Delete temp files
+echo "delete temp files"
+rm *.wav 
