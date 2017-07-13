@@ -9,9 +9,9 @@ targetdir=$DIR1/Slime-universe/Slime-universe/footsteps
 
 IFS='
 '
+# 100 = 1 semitone
 speedmin=-200
 speedmax=200
-
 
 echo "materials location: $materials"
 echo "footsteps location: $footsteps"
@@ -84,7 +84,9 @@ for footcount in `seq 0 $(($num_footstepfiles-1))`;
 
 
             done
-
+            # Remove temp audiofiles
+            rm currentfootstep_temp.wav
+            rm currentmaterial_temp.wav
             echo "$IFS""Footsteps completed...$IFS"
     done
 
