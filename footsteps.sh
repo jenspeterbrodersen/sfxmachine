@@ -1,11 +1,11 @@
 #!/bin/sh
 
-DIR1="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# define source & target dir
-footsteps=$DIR1/Slime-universe/themelibrary/footsteps
-materials=$DIR1/Slime-universe/baselibrary/materials
-targetdir=$DIR1/Slime-universe/Slime-universe/footsteps
+# Define source & target dir
+materials=$baselibrary/materials
+footsteps=$themepath/footsteps
+targetdir=$DIR/$projectname/$projectname/footsteps
 
 IFS='
 '
@@ -70,7 +70,7 @@ for footcount in `seq 0 $(($num_footstepfiles-1))`;
                 # echo "material-filename = $materialfile"
 
                 # ...and then mix them together                
-                echo "Creating footstep $materialcount: $footfile ($speedvalue) + $materialfile"
+                echo "Creating footstep $materialcount: $footfile (pitchvariation=$speedvalue) + $materialfile"
 
                 # Add random pitch to footsteps
                 speedvalue=$((RANDOM % ($speedmax-$speedmin) + $speedmin))

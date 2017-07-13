@@ -1,5 +1,4 @@
 # Pick a random file from the source folder
-echo "picking random folder"
  
 if [[ -d "${sourcepath}" ]]
     
@@ -11,7 +10,6 @@ if [[ -d "${sourcepath}" ]]
         currentfile=$sourcepath/${file_matrix[$((RANDOM%num_files))]}
         echo "picking file: $currentfile"
 
-       
         # Check if file is mono, then create random panning
         channelcheck=($(soxi -c $currentfile))
 
