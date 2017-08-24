@@ -3,24 +3,26 @@
 echo "Creating gunshots"
 
 # Define source & target dir
-gunshots=$baselibrary/gunshots
+gundir=$baselibrary/gunshots
 themed=$themepath/gunshots
 targetdir=$DIR/$projectname/$projectname/gunshots
 
+gunshottrimvalue=1
+gunshotfadevalue=0.8
 # 100 = 1 semitone
 speedmin=-500
 speedmax=1500
 
 # Pick a random file from the source folder
 
-if [[ -d "${gunshots}" ]]
+if [[ -d "${gundir}" ]]
     
     then
-        file_matrix=($(ls "${gunshots}"))
+        file_matrix=($(ls "${gundir}"))
         num_files=${#file_matrix[*]}
 
         # Pick random gun sound
-        currentgun=$gunshots/${file_matrix[$((RANDOM%num_files))]}
+        currentgun=$gundir/${file_matrix[$((RANDOM%num_files))]}
         # echo "Picking random gunshot file: $currentgun"
         
         # Adding random pitch 
@@ -29,3 +31,6 @@ if [[ -d "${gunshots}" ]]
 
               
 fi
+
+echo "current gun is $currentgun loop is $i"
+sox -M -v0.8 file1.wav -v0.8 file2.wav currentgun_temp.wav $DIR/$projectname/$projectname/gunshots/shoot$i.wav channels 2 trim 0 $gunshottrimvalue fade t 0 0 $gunshotfadevalue norm -1

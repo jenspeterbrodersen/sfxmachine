@@ -14,6 +14,7 @@ mkdir -p $DIR/$projectname/$projectname/music
 mkdir -p $DIR/$projectname/$projectname/footsteps
 mkdir -p $DIR/$projectname/$projectname/ui
 mkdir -p $DIR/$projectname/$projectname/gunshots
+mkdir -p $DIR/$projectname/$projectname/jump
 
 # Copy files from baselibrary to new library
-cp -R /Applications/sox-14.4.1/sourcelibraries/baselibrary/. $DIR/$projectname/baselibrary/
+# cp -R /Applications/sox-14.4.1/sourcelibraries/baselibrary/. $DIR/$projectname/baselibrary/

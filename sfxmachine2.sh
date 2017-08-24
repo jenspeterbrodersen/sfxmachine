@@ -20,13 +20,12 @@ source createfolders.sh
 # echo "number of round-robin variations"; read roundrobins;
 
 # Fixed variable values (for quicker debugging)
-# sourcepath=/Volumes/AudioLibraries/SFXMachine/Success
-sourcepath=/Applications/sox-14.4.1/testlyde/office
+sourcepath=/Applications/sox-14.4.1/testlyde/scifi2
 themepath=/Applications/sox-14.4.1/sourcelibraries/themelibrary
 baselibrary=/Applications/sox-14.4.1/sourcelibraries/baselibrary
 sfxname="sfx"
-amount=25
-trimvalue=2.5
+amount=2100
+trimvalue=1
 fadeoutvalue=0.5
 roundrobins=0
 
@@ -39,7 +38,7 @@ for i in `seq 1 $amount`;
     for ii in `seq 1 4`;
         do
             # Set new randomized variabeles for pitch (speed) playback timing (delay) and panning for each time a new random file is picked
-            speedmin=-200
+            speedmin=1000
             speedmax=3000
             speedvalue=$((RANDOM % ($speedmax-$speedmin+1) + $speedmin))
             panleft=$((RANDOM % 10))
@@ -65,7 +64,7 @@ for i in `seq 1 $amount`;
                             sox -V1 $currentfile channelconvert$ii.wav remix 1v0.$panleft 1v0.$panright norm -1
                         else
                             # echo "This file is stereo, creating channelconvert$ii.wav"
-                            sox -V1 $currentfile channelconvert$ii.wav #norm -1
+                            sox -V1 $currentfile channelconvert$ii.wav norm -1
                     fi
                     
                 # Add effects
@@ -86,25 +85,25 @@ for i in `seq 1 $amount`;
     source jumps.sh
 
     # Create round robin variations
-    for variation in `seq 1 $roundrobins`; 
-        do
-            echo "creating round robin variation #$variation"
-            for count in `seq 1 4`;
-                do
-                    delayfloat=$((RANDOM % 1))
-                    speedvalue=$((RANDOM % ($speedmax-$speedmin+1) + $speedmin))
-                    sox -V1 file$count.wav file$count-var.wav speed $speedvalue"c" #delay 0.$delayfloat 0.$delayfloat
+    # for variation in `seq 1 $roundrobins`; 
+    #     do
+    #         echo "creating round robin variation #$variation"
+    #         for count in `seq 1 4`;
+    #             do
+    #                 delayfloat=$((RANDOM % 1))
+    #                 speedvalue=$((RANDOM % ($speedmax-$speedmin+1) + $speedmin))
+    #                 sox -V1 file$count.wav file$count-var.wav speed $speedvalue"c" #delay 0.$delayfloat 0.$delayfloat
 
-                done
+    #             done
 
-            # Create SFX variations
-            echo "mixing file1-r.wav...file4-r.wav together into $sfxname$i-$variation.wav"
-            sox -V1 -M file1-var.wav file2-var.wav file3-var.wav file4-var.wav $DIR/$projectname/$projectname/sfx/$sfxname$i-$variation.wav channels 2 trim 0 $trimvalue fade t 0 0 $fadeoutvalue norm -1
+    #         # Create SFX variations
+    #         echo "mixing file1-r.wav...file4-r.wav together into $sfxname$i-$variation.wav"
+    #         sox -V1 -M file1-var.wav file2-var.wav file3-var.wav file4-var.wav $DIR/$projectname/$projectname/sfx/$sfxname$i-$variation.wav channels 2 trim 0 $trimvalue fade t 0 0 $fadeoutvalue norm -1
 
-            # Create gunshot variations
-            sox -V1 -M file1-var.wav file2-var.wav file3-var.wav file4-var.wav currentgun_temp.wav $DIR/$projectname/$projectname/gunshots/shoot$i-$variation.wav channels 2 trim 0 $gunshottrimvalue fade t 0 0 $gunshotfadevalue norm -1
+    #         # Create gunshot variations
+    #         sox -V1 -M file1-var.wav file2-var.wav file3-var.wav file4-var.wav currentgun_temp.wav $DIR/$projectname/$projectname/gunshots/shoot$i-$variation.wav channels 2 trim 0 $gunshottrimvalue fade t 0 0 $gunshotfadevalue norm -1
         
-        done
+    #     done
 
 done
 
@@ -113,8 +112,8 @@ echo "delete temp files $IFS"
 rm *.wav 
 
 # Create UI sounds
-source ui.sh
+# source ui.sh
 
 # Create Footstep sounds
-source footsteps.sh
+# source footsteps.sh
 
