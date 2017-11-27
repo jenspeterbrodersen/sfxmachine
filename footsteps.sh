@@ -80,7 +80,7 @@ for footcount in `seq 0 $(($num_footstepfiles-1))`;
                 sox -V1 $currentmaterial currentmaterial_temp.wav fade t 0.1 0
 
                 # Mix footstep and material together
-                sox -V1 -M currentfootstep_temp.wav -v0.9 currentmaterial_temp.wav $targetdir/footstep_0$((footcount+1))_$materialname.wav remix -
+                sox -V1 -M currentfootstep_temp.wav -v0.9 currentmaterial_temp.wav $targetdir/footstep_0$((footcount+1))_$materialname.wav remix - norm -5
 
 
             done

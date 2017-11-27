@@ -21,11 +21,11 @@ source createfolders.sh
 
 # Fixed variable values (for quicker debugging)
 # sourcepath=/Volumes/AudioLibraries/SFXMachine/Success
-sourcepath=/Applications/sox-14.4.1/testlyde/office
+sourcepath=/Applications/sox-14.4.1/testlyde/example
 themepath=/Applications/sox-14.4.1/sourcelibraries/themelibrary
 baselibrary=/Applications/sox-14.4.1/sourcelibraries/baselibrary
 sfxname="sfx"
-amount=25
+amount=10
 trimvalue=2.5
 fadeoutvalue=0.5
 roundrobins=0
@@ -86,25 +86,29 @@ for i in `seq 1 $amount`;
     source jumps.sh
 
     # Create round robin variations
-    for variation in `seq 1 $roundrobins`; 
-        do
-            echo "creating round robin variation #$variation"
-            for count in `seq 1 4`;
-                do
-                    delayfloat=$((RANDOM % 1))
-                    speedvalue=$((RANDOM % ($speedmax-$speedmin+1) + $speedmin))
-                    sox -V1 file$count.wav file$count-var.wav speed $speedvalue"c" #delay 0.$delayfloat 0.$delayfloat
 
-                done
+    if (($roundrobins > 0)); 
+        then
+        for variation in `seq 1 $roundrobins`; 
+            do
+                echo "creating round robin variation #$variation"
+                for count in `seq 1 4`;
+                    do
+                        delayfloat=$((RANDOM % 1))
+                        speedvalue=$((RANDOM % ($speedmax-$speedmin+1) + $speedmin))
+                        sox -V1 file$count.wav file$count-var.wav speed $speedvalue"c" #delay 0.$delayfloat 0.$delayfloat
 
-            # Create SFX variations
-            echo "mixing file1-r.wav...file4-r.wav together into $sfxname$i-$variation.wav"
-            sox -V1 -M file1-var.wav file2-var.wav file3-var.wav file4-var.wav $DIR/$projectname/$projectname/sfx/$sfxname$i-$variation.wav channels 2 trim 0 $trimvalue fade t 0 0 $fadeoutvalue norm -1
+                    done
 
-            # Create gunshot variations
-            sox -V1 -M file1-var.wav file2-var.wav file3-var.wav file4-var.wav currentgun_temp.wav $DIR/$projectname/$projectname/gunshots/shoot$i-$variation.wav channels 2 trim 0 $gunshottrimvalue fade t 0 0 $gunshotfadevalue norm -1
-        
-        done
+                # Create SFX variations
+                echo "mixing file1-r.wav...file4-r.wav together into $sfxname$i-$variation.wav"
+                sox -V1 -M file1-var.wav file2-var.wav file3-var.wav file4-var.wav $DIR/$projectname/$projectname/sfx/$sfxname$i-$variation.wav channels 2 trim 0 $trimvalue fade t 0 0 $fadeoutvalue norm -1
+
+                # Create gunshot variations
+                sox -V1 -M file1-var.wav file2-var.wav file3-var.wav file4-var.wav currentgun_temp.wav $DIR/$projectname/$projectname/gunshots/shoot$i-$variation.wav channels 2 trim 0 $gunshottrimvalue fade t 0 0 $gunshotfadevalue norm -1
+            
+            done
+    fi
 
 done
 
@@ -113,7 +117,7 @@ echo "delete temp files $IFS"
 rm *.wav 
 
 # Create UI sounds
-source ui.sh
+# source ui.sh
 
 # Create Footstep sounds
 source footsteps.sh
