@@ -117,7 +117,7 @@ echo "delete temp files $IFS"
 rm *.wav 
 
 # Create UI sounds
-# source ui.sh
+source ui.sh
 
 # Create Footstep sounds
 source footsteps.sh

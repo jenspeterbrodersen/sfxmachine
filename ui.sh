@@ -1,7 +1,9 @@
 echo "Creating UI sounds..."
 
+sfxcount=
+
 # Run this loop for as many sfx you need
-for i in `seq 1 $sfxcount`;
+for i in `seq 1 $amount`;
     do
 
     # Pick random file in folder
