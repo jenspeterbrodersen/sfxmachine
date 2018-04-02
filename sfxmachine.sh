@@ -21,14 +21,14 @@ source createfolders.sh
 
 # Fixed variable values (for quicker debugging)
 # sourcepath=/Volumes/AudioLibraries/SFXMachine/Success
-sourcepath=/Applications/sox-14.4.1/testlyde/example
-themepath=/Applications/sox-14.4.1/sourcelibraries/themelibrary
-baselibrary=/Applications/sox-14.4.1/sourcelibraries/baselibrary
+sourcepath=~/Documents/sfxmachine/source/
+themepath=~/Documents/sfxmachine/themelibrary/
+baselibrary=~/Documents/sfxmachine/baselibrary/
 sfxname="sfx"
 amount=10
 trimvalue=2.5
 fadeoutvalue=0.5
-roundrobins=0
+roundrobins=4
 
 # Main loop creating the sfx
 for i in `seq 1 $amount`;
@@ -38,6 +38,7 @@ for i in `seq 1 $amount`;
     # Picking 4 random files, and applying effectschain
     for ii in `seq 1 4`;
         do
+        echo "Setting values for source sound # $ii..."
             # Set new randomized variabeles for pitch (speed) playback timing (delay) and panning for each time a new random file is picked
             speedmin=-200
             speedmax=3000
