@@ -17,6 +17,7 @@ mkdir -p $DIR/$projectname/$projectname/impacts
 mkdir -p $DIR/$projectname/$projectname/destruction
 mkdir -p $DIR/$projectname/$projectname/gunshots
 mkdir -p $DIR/$projectname/$projectname/ambience
+mkdir -p $DIR/$projectname/$projectname/explosions
 
 # Copy files from baselibrary to new library
 # cp -R /Applications/sox-14.4.1/sourcelibraries/baselibrary/. $DIR/$projectname/baselibrary/

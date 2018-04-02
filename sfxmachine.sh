@@ -25,10 +25,10 @@ sourcepath=~/Documents/sfxmachine/source/
 themepath=~/Documents/sfxmachine/themelibrary/
 baselibrary=~/Documents/sfxmachine/baselibrary/
 sfxname="sfx"
-amount=10
+amount=200
 trimvalue=2.5
 fadeoutvalue=0.5
-roundrobins=4
+roundrobins=0
 
 # Main loop creating the sfx
 for i in `seq 1 $amount`;
@@ -82,6 +82,9 @@ for i in `seq 1 $amount`;
 
     # Create gunshot sounds
     source gunshots.sh
+
+     # Create explosion sounds 
+    source explosions.sh
 
     # Create jump sounds 
     source jumps.sh
